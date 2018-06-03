@@ -2,25 +2,17 @@
 
 namespace app\models;
 
-use Yii;
+use \yii\db\ActiveRecord;
 
-class Categorys extends \yii\db\ActiveRecord {
-
+class Producer extends ActiveRecord {
     public static function tableName() {
-        return 'category';
+        return 'producers';
     }
 
     public function rules() {
         return [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
-        ];
-    }
-
-    public function attributeLabels() {
-        return [
-            'id' => 'ID',
-            'name' => 'Name',
         ];
     }
 }

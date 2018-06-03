@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m180602_153855_create_goods_table extends Migration {
+class m180602_155911_create_goods_table extends Migration {
 
     public function safeUp() {
         $this->createTable('goods', [
@@ -22,9 +22,22 @@ class m180602_153855_create_goods_table extends Migration {
             'like' => $this -> integer(),
             'dislike' => $this -> integer()
         ]);
+
+        $this->addForeignKey('fk-goods-category_id', 'goods', 'category_id', 'categorys', 'id', 'CASCADE');
+        $this->addForeignKey('fk-goods-producer_id', 'goods', 'producer_id', 'producers', 'id', 'CASCADE');
     }
 
     public function safeDown() {
+        $this->dropForeignKey(
+            'fk-goods-category_id',
+            'goods'
+        );
+
+        $this->dropForeignKey(
+            'fk-goods-producer_id',
+            'goods'
+        );
+        
         $this->dropTable('goods');
     }
 }
