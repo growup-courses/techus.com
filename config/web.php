@@ -53,10 +53,7 @@ $config = [
             'enableStrictParsing' => true,
             'rules' => [
               '' => 'site/index',
-              [
-                'class' => 'yii\rest\UrlRule',
-                'controller' => 'user',
-              ],
+              ['class' => 'yii\rest\UrlRule', 'controller' => 'site'],
             ],
         ],
     ],
