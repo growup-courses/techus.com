@@ -58,7 +58,6 @@ $config = [
               ['class' => 'yii\rest\UrlRule', 'controller' => 'goods'],
               // ['class' => 'yii\rest\UrlRule', 'controller' => 'producers'],
               ['class' => 'yii\rest\UrlRule', 'controller' => 'categorys'],
-              ['class' => 'yii\rest\UrlRule', 'controller' => 'news'],
               [
                 'class' => 'yii\rest\UrlRule',
                 'controller' => 'news',
