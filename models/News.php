@@ -4,30 +4,13 @@ namespace app\models;
 
 use Yii;
 
-/**
- * This is the model class for table "news".
- *
- * @property int $id
- * @property string $author
- * @property string $text
- * @property int $likes
- * @property int $dislikes
- */
-class News extends \yii\db\ActiveRecord
-{
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
+class News extends \yii\db\ActiveRecord {
+
+    public static function tableName() {
         return 'news';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['text'], 'string'],
             [['likes', 'dislikes'], 'integer'],
@@ -35,11 +18,7 @@ class News extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'author' => 'Author',

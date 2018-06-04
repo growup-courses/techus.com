@@ -12,7 +12,7 @@ class m180602_155912_create_comments_table extends Migration {
             'good_id' => $this -> integer()
         ]);
 
-        $this->addForeignKey('fk-comments-good_id', 'comments', 'good_id', 'goods', 'id', 'CASCADE');
+        $this->addForeignKey('fk-comments-good_id', 'comments', 'good_id', 'goods', 'id', 'CASCADE' , 'CASCADE');
     }
 
     public function safeDown() {
