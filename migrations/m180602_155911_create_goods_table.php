@@ -23,8 +23,8 @@ class m180602_155911_create_goods_table extends Migration {
             'dislike' => $this -> integer()
         ]);
 
-        $this->addForeignKey('fk-goods-category_id', 'goods', 'category_id', 'categorys', 'id', 'CASCADE');
-        $this->addForeignKey('fk-goods-producer_id', 'goods', 'producer_id', 'producers', 'id', 'CASCADE');
+        $this->addForeignKey('fk-goods-category_id', 'goods', 'category_id', 'categorys', 'id', 'CASCADE' , 'CASCADE');
+        $this->addForeignKey('fk-goods-producer_id', 'goods', 'producer_id', 'producers', 'id', 'CASCADE' , 'CASCADE');
     }
 
     public function safeDown() {
@@ -37,7 +37,7 @@ class m180602_155911_create_goods_table extends Migration {
             'fk-goods-producer_id',
             'goods'
         );
-        
+
         $this->dropTable('goods');
     }
 }
