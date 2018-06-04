@@ -59,6 +59,15 @@ $config = [
               // ['class' => 'yii\rest\UrlRule', 'controller' => 'producers'],
               ['class' => 'yii\rest\UrlRule', 'controller' => 'categorys'],
               ['class' => 'yii\rest\UrlRule', 'controller' => 'news'],
+              [
+                'class' => 'yii\rest\UrlRule',
+                'controller' => 'news',
+                'pluralize' => false,
+                'extraPatterns' => [
+                  'GET add-like/{id}' => 'add-like',
+                  'GET dis-like/{id}' => 'dis-like',
+                ],
+              ],
             ],
         ],
     ],

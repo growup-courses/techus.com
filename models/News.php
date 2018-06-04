@@ -18,14 +18,6 @@ class News extends \yii\db\ActiveRecord {
         ];
     }
 
-    public static function maxLike() {
-      return self::find() -> max('likes');
-    }
-
-    public static function maxDislike() {
-      return self::find() -> max('dislikes');
-    }
-
     public function attributeLabels() {
         return [
             'id' => 'ID',
