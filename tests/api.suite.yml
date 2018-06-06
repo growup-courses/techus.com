@@ -1,0 +1,7 @@
+actor: ApiTester
+modules:
+    enabled:
+        - REST:
+            url: http://techus.com
+            depends: PhpBrowser
+            configFile: 'config/test.php'
