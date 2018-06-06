@@ -11,11 +11,3 @@ modules:
     enabled:
       - Filesystem
       - Yii2
-    config:
-        Db:
-            dsn: 'PDO DSN HERE'
-            user: 'vanya'
-            password: 'vanya'
-            dump: tests/_data/your-dump-name.sql
-            cleanup: true # reload dump between tests
-            populate: true # load dump before all tests

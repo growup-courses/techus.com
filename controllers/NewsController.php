@@ -14,7 +14,7 @@ class NewsController extends ActiveController {
       return $news;
     }
 
-    public function actionDisLike($id) {
+    public function actionAddDislike($id) {
       $news = News::findOne($id);
       $news->updateCounters(['dislikes'=>1]);
       return $news;

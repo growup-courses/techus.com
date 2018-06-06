@@ -35,7 +35,7 @@ return [
                 'pluralize' => false,
                 'extraPatterns' => [
                   'GET add-like/{id}' => 'add-like',
-                  'GET dis-like/{id}' => 'dis-like',
+                  'GET add-dislike/{id}' => 'add-dislike',
                 ],
               ],
             ],
