@@ -1,8 +1,11 @@
 <?php
 
+use app\models\News;
+
 
 class AddLikeCest
 {
+
     public function _before(ApiTester $I)
     {
     }
@@ -14,15 +17,20 @@ class AddLikeCest
     // tests
     public function AddLikes(ApiTester $I)
     {
-      $I->sendGET('/news/add-like/1');
+      $a = new News();
+      $a -> author = 1;
+      $a -> text = text;
+      $a -> save();
+      $I->sendGET('/news/add-like/35');
       $I->seeResponseCodeIs(200);
       $I->seeResponseIsJson();
       $I->seeResponseContainsJson([
-         'id' => 1,
-         'author' => 'ivan',
-         'text' => 'ivan',
-         'likes' => 54,
-         'dislikes' => 16
+         'id' => 35,
+         'author' => 1,
+         'text' => 1,
+         'likes' => 1,
+         'dislikes' => 0
      ]);
+     News::deleteAll();
     }
 }
