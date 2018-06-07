@@ -53,7 +53,7 @@ $config = [
             'enableStrictParsing' => true,
             'rules' => [
               '' => 'site/index',
-              ['class' => 'yii\rest\UrlRule', 'controller' => 'comments'],
+              // ['class' => 'yii\rest\UrlRule', 'controller' => 'comments'],
               ['class' => 'yii\rest\UrlRule', 'controller' => 'users'],
               ['class' => 'yii\rest\UrlRule', 'controller' => 'goods'],
               // ['class' => 'yii\rest\UrlRule', 'controller' => 'producers'],
@@ -65,6 +65,14 @@ $config = [
                 'extraPatterns' => [
                   'GET add-like/{id}' => 'add-like',
                   'GET add-dislike/{id}' => 'add-dislike',
+                ],
+              ],
+              [
+                'class' => 'yii\rest\UrlRule',
+                'controller' => 'comments',
+                'pluralize' => false,
+                'extraPatterns' => [
+                  'POST add-comment/{id}' => 'add-comment',
                 ],
               ],
             ],

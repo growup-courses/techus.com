@@ -13,6 +13,6 @@ class m180602_153839_create_producers_table extends Migration {
     }
 
   public function safeDown() {
-        $this->dropTable('products');
+        $this->dropTable('producers');
     }
 }

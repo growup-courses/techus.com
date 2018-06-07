@@ -6,7 +6,6 @@ use Faker\Factory;
 
 class NewsCest
 {
-  // public $modelClass = 'app\models\News';
 
     public function _before(ApiTester $I)
     {
@@ -94,6 +93,6 @@ class NewsCest
          'likes' => $a -> likes,
          'dislikes' => $a -> dislikes
      ]);
-     News::deleteAll();
+     // News::deleteAll();
     }
 }
