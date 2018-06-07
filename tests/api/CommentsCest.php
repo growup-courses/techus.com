@@ -26,7 +26,6 @@ class CommentsCest
       $news -> text = $faker -> text;
       $news -> likes = $faker -> randomDigit;
       $news -> dislikes = $faker -> randomDigit;
-      // $news -> save();
       $comment = new Comments();
       $comment -> name =  $faker-> firstName;
       $comment -> comment_text = $faker -> text;
