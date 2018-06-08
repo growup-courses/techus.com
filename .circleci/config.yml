@@ -14,11 +14,11 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: circleci/mysql:5.7.22
         environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD=true \
+          - MYSQL_DATABASE=circle_test \
+          - MYSQL_HOST=127.0.0.1 \
+          - MYSQL_ROOT_HOST=% \
           - MYSQL_USER=root
-          - MYSQL_HOST: 127.0.0.1
-          - MYSQL_PASSWORD=
-          - MYSQL_ALLOW_EMPTY_PASSWORD=true
-          - MYSQL_DATABASE=techus-test
 
     working_directory: ~/repo
 
