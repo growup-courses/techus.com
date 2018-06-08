@@ -4,9 +4,5 @@ modules:
         - Filesystem
         - Yii2
         - REST:
-<<<<<<< HEAD
             url: 165.227.135.96
-=======
-            url: http://localhost:8889
->>>>>>> f61f6ce7840c80a7a89d6c56cf2efa0e4766a481
             depends: PhpBrowser
