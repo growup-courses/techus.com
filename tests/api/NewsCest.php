@@ -3,16 +3,20 @@ use app\models\News;
 use Faker\Factory;
 
 class NewsCest {
-
+public function CreateNews()
+{
+  $faker = Factory::create();
+  $news = new News();
+  $news -> author =  $faker-> firstName;
+  $news -> text = $faker -> text;
+  $news -> likes = $faker -> randomDigit;
+  $news -> dislikes = $faker -> randomDigit;
+  $news -> save();
+  return $news;
+}
   public function AddLikes(ApiTester $I)
   {
-    $faker = Factory::create();
-    $news = new News();
-    $news -> author =  $faker-> firstName;
-    $news -> text = $faker -> text;
-    $news -> likes = $faker -> randomDigit;
-    $news -> dislikes = $faker -> randomDigit;
-    $news -> save();
+    $news = $this->CreateNews();
     $I -> sendGET('/news/add-like/' . $news->id);
     $I -> seeResponseCodeIs(200);
     $I -> seeResponseIsJson();
@@ -24,13 +28,7 @@ class NewsCest {
 
   public function AddDislikes(ApiTester $I)
   {
-    $faker = Factory::create();
-    $news = new News();
-    $news -> author =  $faker-> firstName;
-    $news -> text = $faker -> text;
-    $news -> likes = $faker -> randomDigit;
-    $news -> dislikes = $faker -> randomDigit;
-    $news -> save();
+    $news = $this->CreateNews();
     $I -> sendGET('/news/add-dislike/' . $news->id);
     $I -> seeResponseCodeIs(200);
     $I -> seeResponseIsJson();
@@ -42,13 +40,7 @@ class NewsCest {
 
   public function Show(ApiTester $I)
   {
-    $faker = Factory::create();
-    $news = new News();
-    $news -> author =  $faker-> firstName;
-    $news -> text = $faker -> text;
-    $news -> likes = $faker -> randomDigit;
-    $news -> dislikes = $faker -> randomDigit;
-    $news -> save();
+    $news = $this->CreateNews();
     $I -> sendGET('/news/' . $news->id);
     $I -> seeResponseCodeIs(200);
     $I -> seeResponseIsJson();
@@ -64,13 +56,7 @@ class NewsCest {
 
   public function Index(ApiTester $I)
   {
-    $faker = Factory::create();
-    $news = new News();
-    $news -> author =  $faker-> firstName;
-    $news -> text = $faker -> text;
-    $news -> likes = $faker -> randomDigit;
-    $news -> dislikes = $faker -> randomDigit;
-    $news -> save();
+    $news = $this->CreateNews();
     $I -> sendGET('/news');
     $I -> seeResponseCodeIs(200);
     $I -> seeResponseIsJson();
