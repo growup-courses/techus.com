@@ -1,18 +1,9 @@
-# PHP CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-php/ for more details
-#
 version: 2
 jobs:
   build:
+    working_directory: ~/techus.com
     docker:
-      # specify the version you desire here
       - image: circleci/php:7.1-node-browsers
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mysql:5.7.22
         environment:
           MYSQL_HOST: 127.0.0.1
           MYSQL_DB: techus_test
@@ -24,34 +15,25 @@ jobs:
         environment:
           MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: true
-
-    working_directory: ~/repo
-
     steps:
+      - checkout
       - run:
           name: Install PHP extensions
           command: sudo docker-php-ext-install pdo_mysql
       - run:
-          name: Install Composer
-          command: 'curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer'
+          name: install mysql client
+          command: sudo apt install -y mysql-client mysql-server
       - run:
           name: Display versions
           command: |
             php -v
             composer --version
-      - checkout
-      - run:
-          name: install mysql client
-          command: sudo apt install -y mysql-client
-      # Download and cache dependencies
+            mysql --version
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "composer.json" }}
-          # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-
       - run: composer install -n --prefer-dist
-
       - save_cache:
           paths:
             - ./vendor
@@ -60,6 +42,13 @@ jobs:
           name: Create database
           command: |
             sudo mysql -h 127.0.0.1 -u root -e "CREATE DATABASE IF NOT EXISTS techus_test;"
-      # run tests!
-      - run: php tests/bin/yii migrate
+      - run:
+          name: Migrations run
+          command: |
+            php tests/bin/yii migrate --interactive=0
+      - run:
+          name: Up server
+          command: |
+            php tests/bin/yii serve --port=8889
+          background: true  
       - run: php vendor/bin/codecept run tests/api/
