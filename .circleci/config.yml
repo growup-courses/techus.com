@@ -7,19 +7,25 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/php:7.2-apache-stretch-node-browsers
+      - image: circleci/php:7.1-node-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-      - image: circleci/mysql:5.7.22
+      # - image: circleci/mysql:5.7.22
         environment:
-          - MYSQL_ALLOW_EMPTY_PASSWORD=true \
-          - MYSQL_DATABASE=circle_test \
-          - MYSQL_HOST=127.0.0.1 \
-          - MYSQL_ROOT_HOST=% \
-          - MYSQL_USER=root
+          - MYSQL_HOST: 127.0.0.1
+          - MYSQL_DATABASE: techus-test
+          - MYSQL_USER: root
+          - MYSQL_ALLOW_EMPTY_PASSWORD: true
+          - MYSQL_PASSWORD:
 
+      - image: mysql:5.7.22
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --innodb-large-prefix=true --innodb-file-format=Barracuda
+        environment:
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          
     working_directory: ~/repo
 
     steps:
