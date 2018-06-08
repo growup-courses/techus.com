@@ -25,7 +25,7 @@ jobs:
         environment:
           MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: true
-          
+
     working_directory: ~/repo
 
     steps:
@@ -54,6 +54,9 @@ jobs:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
+      - run:
+          name: Mysql database
+          command: mysql  -h 127.0.0.1 -u root -e "create database techus-test;"
 
       # run tests!
       - run: php vendor/bin/codecept run tests/api/
