@@ -12,18 +12,18 @@ jobs:
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-      - image: circleci/mysql:5.7.22
-      # command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --innodb-large-prefix=true --innodb-file-format=Barracuda
-      environment:
+      # - image: circleci/mysql:5.7.22
+        environment:
           MYSQL_HOST: 127.0.0.1
           MYSQL_DB: techus-test
           MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: true
           MYSQL_PASSWORD:
-            # - image: mysql:5.7.22
-        # environment:
-          # MYSQL_USER: root
-          # MYSQL_ALLOW_EMPTY_PASSWORD: true
+      - image: mysql:5.7.22
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --innodb-large-prefix=true --innodb-file-format=Barracuda
+        environment:
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
 
     working_directory: ~/repo
 
@@ -41,8 +41,8 @@ jobs:
             composer --version
       - checkout
       - run:
-        name: install mysql client
-        command: sudo apt install -y mysql-client
+          name: install mysql client
+          command: sudo apt install -y mysql-client
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -58,8 +58,8 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
 
       - run:
-        name: Mysql database
-        command: mysql -h 127.0.0.1 -u root -e "create database techus-test;"
+          name: Mysql database
+          command: mysql -h 127.0.0.1 -u root -e "create database techus-test;"
 
       # run tests!
       - run: php tests/bin/yii migrate
