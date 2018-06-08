@@ -41,9 +41,21 @@ jobs:
       - run:
           name: Create database
           command: |
+<<<<<<< HEAD
             sudo mysql -h 165.227.135.96 -u root -e "CREATE DATABASE IF NOT EXISTS techus_test;"
+=======
+            sudo mysql -h 127.0.0.1 -u root -e "CREATE DATABASE IF NOT EXISTS techus_test;"
+>>>>>>> f61f6ce7840c80a7a89d6c56cf2efa0e4766a481
       - run:
           name: Migrations run
           command: |
             php tests/bin/yii migrate --interactive=0
+<<<<<<< HEAD
+=======
+      - run:
+          name: Up server
+          command: |
+            php tests/bin/yii serve --port=8889
+          background: true  
+>>>>>>> f61f6ce7840c80a7a89d6c56cf2efa0e4766a481
       - run: php vendor/bin/codecept run tests/api/
