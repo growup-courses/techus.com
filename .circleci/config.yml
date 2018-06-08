@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: circleci/php:7.1-node-browsers
         environment:
-          MYSQL_HOST: 127.0.0.1
+          MYSQL_HOST: 165.227.135.96
           MYSQL_DB: techus_test
           MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: true
@@ -41,7 +41,7 @@ jobs:
       - run:
           name: Create database
           command: |
-            sudo mysql -h 127.0.0.1 -u root -e "CREATE DATABASE IF NOT EXISTS techus_test;"
+            sudo mysql -h 165.227.135.96 -u root -e "CREATE DATABASE IF NOT EXISTS techus_test;"
       - run:
           name: Migrations run
           command: |

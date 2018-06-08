@@ -4,5 +4,5 @@ modules:
         - Filesystem
         - Yii2
         - REST:
-            url: http://techus.com
+            url: 165.227.135.96
             depends: PhpBrowser
