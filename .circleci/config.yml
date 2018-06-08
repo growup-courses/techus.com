@@ -59,7 +59,7 @@ jobs:
 
       - run:
           name: Mysql database
-          command: mysql -h 127.0.0.1 -u root -e "CREATE DATABASE 'techus-test'"
+          command: mysql -h 127.0.0.1 -u root -e "CREATE DATABASE `techus-test`"
 
       # run tests!
       - run: php tests/bin/yii migrate
