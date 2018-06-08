@@ -1,26 +1,20 @@
 <?php
-
 use yii\db\Migration;
-
-class m180607_211159_create_comments_table extends Migration {
-
+class m180602_155912_create_comments_table extends Migration {
     public function safeUp() {
         $this->createTable('comments', [
             'id' => $this->primaryKey(),
             'name' => $this -> string(50) -> notNull(),
             'comment_text' => $this -> text() -> notNull(),
-            'news_id' => $this -> integer()
+            'good_id' => $this -> integer()
         ]);
-
-        $this->addForeignKey('fk-comments-news_id', 'comments', 'news_id', 'news', 'id', 'CASCADE' , 'CASCADE');
+        $this->addForeignKey('fk-comments-good_id', 'comments', 'good_id', 'goods', 'id', 'CASCADE' , 'CASCADE');
     }
-
     public function safeDown() {
       $this->dropForeignKey(
-          'fk-comments-news_id',
+          'fk-comments-good_id',
           'comments'
       );
-
       $this->dropTable('comments');
     }
 }
