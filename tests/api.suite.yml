@@ -4,5 +4,5 @@ modules:
         - Filesystem
         - Yii2
         - REST:
-            url: 165.227.135.96
+            url: http://165.227.135.96:80
             depends: PhpBrowser
