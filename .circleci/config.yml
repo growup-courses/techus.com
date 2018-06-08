@@ -18,6 +18,7 @@ jobs:
           - MYSQL_PASSWORD=
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
           - MYSQL_DATABASE=techus-test
+          
     working_directory: ~/repo
 
     steps:
