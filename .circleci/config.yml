@@ -49,7 +49,4 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
 
       # run tests!
-      - run: cd tests/bin
-      - run: migrate/up all
-
       - run: php vendor/bin/codecept run tests/api/
