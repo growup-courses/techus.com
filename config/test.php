@@ -2,9 +2,6 @@
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/test_db.php';
 
-/**
- * Application configuration shared by all test types
- */
 return [
     'id' => 'basic-tests',
     'basePath' => dirname(__DIR__),
@@ -22,7 +19,26 @@ return [
             'basePath' => __DIR__ . '/../web/assets',
         ],
         'urlManager' => [
-            'showScriptName' => true,
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'enableStrictParsing' => true,
+            'rules' => [
+              '' => 'site/index',
+              ['class' => 'yii\rest\UrlRule', 'controller' => 'comments'],
+              ['class' => 'yii\rest\UrlRule', 'controller' => 'users'],
+              ['class' => 'yii\rest\UrlRule', 'controller' => 'goods'],
+              // ['class' => 'yii\rest\UrlRule', 'controller' => 'producers'],
+              ['class' => 'yii\rest\UrlRule', 'controller' => 'categorys'],
+              [
+                'class' => 'yii\rest\UrlRule',
+                'controller' => 'news',
+                'pluralize' => false,
+                'extraPatterns' => [
+                  'GET add-like/{id}' => 'add-like',
+                  'GET add-dislike/{id}' => 'add-dislike',
+                ],
+              ],
+            ],
         ],
         'user' => [
             'identityClass' => 'app\models\User',
