@@ -1,0 +1,49 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/techus.com
+    docker:
+      - image: circleci/php:7.1-node-browsers
+        environment:
+          MYSQL_HOST: http://165.227.135.96:80
+          MYSQL_DB: techus_test
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_PASSWORD:
+      - image: mysql:5.7.22
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --innodb-large-prefix=true --innodb-file-format=Barracuda
+        environment:
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+    steps:
+      - checkout
+      - run:
+          name: Install PHP extensions
+          command: sudo docker-php-ext-install pdo_mysql
+      - run:
+          name: install mysql client
+          command: sudo apt install -y mysql-client mysql-server
+      - run:
+          name: Display versions
+          command: |
+            php -v
+            composer --version
+            mysql --version
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "composer.json" }}
+          - v1-dependencies-
+      - run: composer install -n --prefer-dist
+      - save_cache:
+          paths:
+            - ./vendor
+          key: v1-dependencies-{{ checksum "composer.json" }}
+      - run:
+          name: Create database
+          command: |
+            sudo mysql -h http://165.227.135.96:80 -u root -e "CREATE DATABASE IF NOT EXISTS techus_test;"
+      - run:
+          name: Migrations run
+          command: |
+            php tests/bin/yii migrate --interactive=0
+      - run: php vendor/bin/codecept run tests/api/
